@@ -473,7 +473,7 @@ func TestOptional(t *testing.T) {
 	require.True(t, validator(m).Valid)
 }
 
-func TestValidatingNils(t *testing.T) {
+func TestValidatingNilTargets(t *testing.T) {
 	v := MustCompile(map[string]interface{}{
 		"foo": "bar",
 	})
@@ -481,4 +481,10 @@ func TestValidatingNils(t *testing.T) {
 	res := v(nil)
 	require.False(t, res.Valid)
 	require.False(t, res.Fields["foo"][0].Valid)
+}
+
+func TestValidatingNilExpectations(t *testing.T) {
+	v := MustCompile(nil)
+	res := v(nil)
+	require.True(t, res.Valid)
 }

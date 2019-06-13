@@ -101,6 +101,8 @@ func compile(in interface{}) (validator.Validator, error) {
 		return compileSlice(in.([]interface{}))
 	case isdef.IsDef:
 		return compileIsDef(in.(isdef.IsDef))
+	case nil:
+		return compileIsDef(isdef.IsNil)
 	default:
 		msg := fmt.Sprintf("Cannot compile definition from %v (%T). Expected one of 'map[string]interface{}', 'Slice', or 'IsDef'", in, in)
 		return nil, errors.New(msg)

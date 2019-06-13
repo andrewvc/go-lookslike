@@ -472,3 +472,13 @@ func TestOptional(t *testing.T) {
 
 	require.True(t, validator(m).Valid)
 }
+
+func TestValidatingNils(t *testing.T) {
+	v := MustCompile(map[string]interface{}{
+		"foo": "bar",
+	})
+
+	res := v(nil)
+	require.False(t, res.Valid)
+	require.False(t, res.Fields["foo"][0].Valid)
+}

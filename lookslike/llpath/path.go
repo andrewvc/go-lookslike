@@ -120,6 +120,11 @@ func (p Path) Last() *PathComponent {
 func (p Path) GetFrom(m interface{}) (value interface{}, exists bool) {
 	value = m
 	exists = true
+
+	if value == nil {
+		return nil, false
+	}
+
 	for _, pc := range p {
 		rt := reflect.TypeOf(value)
 		switch rt.Kind() {
